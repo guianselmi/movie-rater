@@ -1,5 +1,3 @@
-"# movie-rater" 
-
 Description
 =====
 Read a JSON file filled with Movies and Star Rating.
