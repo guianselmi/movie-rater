@@ -17,12 +17,10 @@ end
 
 def random
   puts "Randomized list, without immediate duplicates:\n\n"
-
   movies = read_file['movies']
   movies.size.times do
     sampled = movies[0..movies.size>>1].sample
     movies <<= movies.delete(sampled)
-
     puts "#{sampled['title']}: #{sampled['rate']} stars"
   end
 end
