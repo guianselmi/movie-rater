@@ -16,12 +16,19 @@ def save_file(json)
 end
 
 def random
-  json = read_file
-  randomized = json['movies'].sample
-  puts "#{randomized.values.first}: #{randomized.values.last} stars."
+  puts "Randomized list, without immediate duplicates:\n\n"
+
+  movies = read_file['movies']
+  movies.size.times do
+    sampled = movies[0..movies.size>>1].sample
+    movies <<= movies.delete(sampled)
+
+    puts "#{sampled['title']}: #{sampled['rate']} stars"
+  end
 end
 
 options = {}
+rate = ARGV
 
 OptionParser.new do |opts|
   opts.banner = 'Welcome to anselMovie Rating System ™'
@@ -31,11 +38,9 @@ OptionParser.new do |opts|
   opts.on('-r', '--remove MOVIE', String, 'Remove an existing MOVIE.') {|movie| options[:remove] = movie.capitalize}
   opts.on('-u', '--update MOVIE RATING', String, 'Update an existing MOVIE with RATING stars.') {|movie| options[:update] = movie.capitalize}
   opts.on('-d', '--display MOVIE', String, 'Display the MOVIE already included;', 'Tip: display ALL to view all movies.') {|movie| options[:display] = movie.capitalize}
-  opts.on('-?', '--random', 'Display a random movie') {random}
+  opts.on('-?', '--random', 'List some movies in a random order', '(with possible duplicates but NOT in sequence!)') {random}
   opts.on('-h', '--help', 'Show this help.') {puts opts}
 end.parse!
-
-rate = ARGV
 
 if options[:add] && rate.join.to_i < 6
   json = read_file
