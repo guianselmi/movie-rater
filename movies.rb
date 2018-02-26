@@ -32,7 +32,7 @@ OptionParser.new do |opts|
   opts.banner = 'Welcome to anselMovie Rating System ™'
   opts.separator ''
   opts.separator 'Usage: movies.rb [options]'
-  opts.on('-a', '--add MOVIE RATING', String, 'Add a new MOVIE with RATING (0-5) stars.', '(by default it adds 0 (zero) stars if RATE is omitted)') {|movie| options[:add] = movie.capitalize}
+  opts.on('-a', '--add MOVIE RATING', String, 'Add a new MOVIE with RATING (0-5) stars.', '(by default it adds 0 (zero) stars if RATING is omitted)') {|movie| options[:add] = movie.capitalize}
   opts.on('-r', '--remove MOVIE', String, 'Remove an existing MOVIE.') {|movie| options[:remove] = movie.capitalize}
   opts.on('-u', '--update MOVIE RATING', String, 'Update an existing MOVIE with RATING stars.') {|movie| options[:update] = movie.capitalize}
   opts.on('-d', '--display MOVIE', String, 'Display the MOVIE already included;', 'Tip: display ALL to view all movies.') {|movie| options[:display] = movie.capitalize}
